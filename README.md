@@ -1,5 +1,7 @@
 # Metasploit — Port Scanning Nmap & UDP Service Identification
 
+<img src="Metasploit/metasploit.svg" alt="Metasploit" style="width:180px; height:auto;" />
+
 ## Summary:
 
 Demonstrated TCP port enumeration using Nmap and quick UDP service discovery with Metasploit in an isolated lab VM.
