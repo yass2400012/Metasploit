@@ -5,8 +5,7 @@
 ## Summary:
 
 Demonstrated TCP port enumeration using Nmap and quick UDP service discovery with Metasploit in an isolated lab VM.
-Includes exact commands, module configurations, and captured outputs for reproducibility.
-Five screenshots document the workflow and key findings (e.g., SMB, RDP, NetBIOS)..
+Includes exact commands, module configurations, and captured outputs for reproducibility. documented the workflow and key findings (e.g., SMB, RDP, NetBIOS)..
 
 ## What I did
 
@@ -14,7 +13,7 @@ Five screenshots document the workflow and key findings (e.g., SMB, RDP, NetBIOS
 * Inspected module options (`show options`) for `auxiliary/scanner/portscan/tcp`.
 * Performed an Nmap TCP SYN scan from `msfconsole` for deeper service enumeration.
 * Ran `auxiliary/scanner/discovery/udp_sweep` to identify UDP services (e.g., NetBIOS, DNS).
-* Documented outputs and saved 5 screenshots showing the session in the VM.
+* Documented outputs and saved 7 screenshots showing the session in the VM.
 
 ---
 
@@ -66,6 +65,42 @@ msf6 auxiliary(scanner/discovery/udp_sweep) > run
 
 ---
 
+**Vulnerability scanning (VNC)**
+
+Metasploit can quickly surface "low-hanging fruit" vulnerabilities once services are fingerprinted. For example, after identifying a VNC service during enumeration I used Metasploit's VNC scanner modules to check for weak or default authentication.
+
+
+**Quick commands**
+# list VNC scanners
+```text
+msf6 > use auxiliary/scanner/vnc/
+```
+
+# inspect a module
+```text
+msf6 auxiliary(scanner/vnc/vnc_login) > info
+```
+
+# run a VNC login scan (example)
+```text
+msf6 auxiliary(scanner/vnc/vnc_login) > set RHOSTS 10.201.99.202
+msf6 auxiliary(scanner/vnc/vnc_login) > set PASS_FILE /path/to/wordlist.txt
+msf6 auxiliary(scanner/vnc/vnc_login) > set THREADS 10
+msf6 auxiliary(scanner/vnc/vnc_login) > run
+
+```
+
+**Notes:**
+
+* vnc_login can test common/default passwords and use wordlists; tune BRUTEFORCE_SPEED, THREADS and STOP_ON_SUCCESS.
+
+* Use info on any module to view options and behavior before running.
+
+* Record and screenshot any successful logins or notable responses (screenshots included).
+
+---
+
+
 ## Screenshots
 
 *Stored in* `screenshots/` — filenames used in this repo:
@@ -85,6 +120,12 @@ msf6 auxiliary(scanner/discovery/udp_sweep) > run
 **UDP service identification**:
 ![UDP service identification](Metasploit/UDP%20service%20identification.PNG)
 
+**VNC scanning modules**:
+![VNC scanning modules](Metasploit/VNC%20scanning%20modules.PNG)
+
+**VNC login scan**:
+![VNC login scan](Metasploit/VNC%20login%20scan.PNG)
+
 Each image includes a short caption and the exact command used to create it.
 
 ---
@@ -92,12 +133,13 @@ Each image includes a short caption and the exact command used to create it.
 ## Key findings (example)
 
 * `nmap -sS` identified several TCP services (e.g., 135, 139, 445, 3389) on the target host.
-* `auxiliary/scanner/discovery/udp_sweep` identified NetBIOS on UDP/137 during the quick sweep.
-* UDP sweeps can miss services — results depend on timeouts and target firewall behavior.
+* `TCP scan revealed common Windows services (SMB, RDP, RPC).
+* `UDP sweep detected NetBIOS service on UDP/137.
+* `Showed differences between TCP and UDP scanning in terms of results and reliability.
 
 ---
 
-## Skills — Recruiter-friendly (Junior Cybersecurity)
+## Skills
 
 * **Port scanning & reconnaissance**: TCP/UDP discovery using Metasploit & Nmap.
 * **Network enumeration**: Identifying open services (SMB, RDP, DNS, NetBIOS).
