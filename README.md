@@ -1,4 +1,4 @@
-# Metasploit — Port Scanning Nmap & Vulnerability scanning
+# Nmap Port Scanning & Metasploit Vulnerability scanning
 
 <img src="Metasploit/metasploit.svg" alt="Metasploit" style="width:180px; height:auto;" />
 
