@@ -5,7 +5,7 @@
 ## Summary:
 
 Demonstrated TCP port enumeration using Nmap and quick UDP service discovery with Metasploit in an isolated lab VM.
-Includes exact commands, module configurations, and captured outputs for reproducibility. documented the workflow and key findings (e.g., SMB, RDP, NetBIOS)..
+Includes exact commands, module configurations, and captured outputs for reproducibility. documented the workflow and key findings (e.g., SMB, RDP, NetBIOS).
 
 ## What I did
 
